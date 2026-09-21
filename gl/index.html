@@ -660,22 +660,7 @@ body{
 ></script>
 
 <script src="js/player.js" async=""></script>
-<!-- META PIXEL START -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
 
-fbq('init', '1045135948136320');
-fbq('track', 'PageView');
-fbq('track', 'ViewContent');
-</script>
-<!-- META PIXEL END -->
 
 </head>
 
@@ -1094,63 +1079,8 @@ fbq('track', 'ViewContent');
 
 
 
-<!-- NEWSBREAK CLICK ID -> BUYGOODS SUBID5 -->
-<script>
-(function () {
-  function getNewsBreakClickId() {
-    try {
-      return new URL(window.location.href).searchParams.get("nbcid");
-    } catch (e) {
-      return null;
-    }
-  }
 
-  function addNewsBreakSubId(link) {
-    var nbcid = getNewsBreakClickId();
-    if (!nbcid || !link) return;
 
-    try {
-      var url = new URL(link.href, window.location.href);
 
-      if (url.hostname !== "lifebalancepeak.com" || url.pathname !== "/b") return;
-
-      url.searchParams.set("subid5", nbcid);
-      link.href = url.toString();
-    } catch (e) {}
-  }
-
-  // Aplica imediatamente aos links dos potes.
-  document.querySelectorAll('a[href*="lifebalancepeak.com/b"]').forEach(addNewsBreakSubId);
-
-  // Garante o SUBID5 no momento do clique caso outro script tenha atualizado o link depois.
-  document.addEventListener("click", function (event) {
-    var link = event.target.closest && event.target.closest('a[href*="lifebalancepeak.com/b"]');
-    if (link) addNewsBreakSubId(link);
-  }, true);
-})();
-</script>
-<!-- FIM NEWSBREAK CLICK ID -> BUYGOODS SUBID5 -->
-
-<!-- META INITIATE CHECKOUT ON BUY BUTTON CLICK START -->
-<script>
-(function () {
-  var lastICAt = 0;
-
-  document.addEventListener('click', function (event) {
-    var link = event.target.closest && event.target.closest('a[href*="lifebalancepeak.com/b"]');
-    if (!link) return;
-
-    /* Evita disparo duplo acidental no mesmo clique/toque. */
-    var now = Date.now();
-    if (now - lastICAt < 1500) return;
-    lastICAt = now;
-
-    if (typeof window.fbq === 'function') {
-      window.fbq('track', 'InitiateCheckout');
-    }
-  }, true);
-})();
-</script>
-<!-- META INITIATE CHECKOUT ON BUY BUTTON CLICK END -->
 
 </body></html>
