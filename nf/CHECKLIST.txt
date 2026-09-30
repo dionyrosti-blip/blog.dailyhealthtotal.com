@@ -1,7 +1,0 @@
-Update added:
-- The visible Play button now controls the VTurb VSL.
-- On click, the page scrolls smoothly to the VSL.
-- It tries to play immediately inside the user click event.
-- If VTurb is still initializing, it retries for a few seconds.
-- It prefers the exact VTurb player id: vid-6abd3ff508b80e9782bca856.
-- Existing 39:10 offer delay, UTMify, offer cards, links, timer and tracking were left intact.
