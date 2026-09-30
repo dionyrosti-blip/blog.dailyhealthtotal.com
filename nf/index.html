@@ -1,0 +1,1326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
+  <title>Type 2 Diabetes: A New Perspective</title>
+  <style>
+
+:root{
+  --bg:#050505;
+  --text:#f5f5f5;
+  --muted:#a7a7a7;
+  --green:#46d369;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+body{min-height:100vh}
+button{font:inherit}
+
+.topbar{
+  height:48px;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
+  background:#050505;
+  position:relative;
+  z-index:10;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  width:72px;
+  height:24px;
+  overflow:hidden;
+  flex:0 0 72px;
+}
+.brand img{
+  display:block;
+  width:72px !important;
+  height:22px !important;
+  max-width:72px !important;
+  max-height:22px !important;
+  object-fit:contain;
+  object-position:left center;
+}
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+.cast-icon{
+  width:22px;
+  height:22px;
+  display:block;
+  fill:#fff;
+}
+.avatar{
+  width:27px;
+  height:27px;
+  border-radius:4px;
+  background:linear-gradient(135deg,#1e45a8,#6784ff);
+  display:grid;
+  place-items:center;
+  font-size:11px;
+  font-weight:800;
+  color:#fff;
+}
+
+.page{
+  width:100%;
+  max-width:430px;
+  margin:0 auto;
+  background:var(--bg);
+  min-height:100vh;
+}
+.player{
+  width:100%;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+.player > *{
+  width:100% !important;
+  max-width:400px !important;
+}
+.video-placeholder{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+  gap:9px;
+  padding:16px;
+  background:
+    radial-gradient(circle at 76% 22%,rgba(150,20,27,.25),transparent 28%),
+    linear-gradient(145deg,#111,#030303 72%);
+}
+.play{
+  width:48px;
+  height:48px;
+  border:2px solid #fff;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  padding-left:3px;
+  font-size:18px;
+}
+.video-placeholder strong{
+  font-size:13px;
+}
+.video-placeholder small{
+  font-size:10px;
+  color:#999;
+  line-height:1.35;
+}
+
+.content{
+  padding:15px 13px 26px;
+}
+h1{
+  margin:0 0 9px;
+  font-size:22px;
+  line-height:1.1;
+  letter-spacing:-.35px;
+}
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:7px;
+  color:#c7c7c7;
+  font-size:10.5px;
+  margin-bottom:13px;
+}
+.match{
+  color:var(--green);
+  font-weight:800;
+}
+.badge{
+  border:1px solid #666;
+  border-radius:2px;
+  padding:2px 5px;
+}
+.hd{
+  border:1px solid #666;
+  border-radius:2px;
+  font-size:9px;
+  padding:2px 4px;
+}
+.watch{
+  width:100%;
+  min-height:41px;
+  border:0;
+  border-radius:4px;
+  background:#fff;
+  color:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  font-size:14px;
+  font-weight:800;
+  margin:0 0 13px;
+}
+.description{
+  margin:0 0 11px;
+  font-size:13px;
+  line-height:1.48;
+  color:#eee;
+}
+.detail{
+  margin:4px 0;
+  color:#9d9d9d;
+  font-size:10.5px;
+  line-height:1.45;
+}
+.detail strong{
+  color:#c9c9c9;
+}
+
+@media(max-width:360px){
+  .topbar{height:46px;padding:0 10px}
+  .brand{width:64px;height:22px;flex-basis:64px}
+  .brand img{
+    width:64px !important;
+    height:19px !important;
+    max-width:64px !important;
+    max-height:19px !important;
+  }
+  .content{padding-left:11px;padding-right:11px}
+  h1{font-size:20px}
+  .description{font-size:12.5px}
+}
+
+@media(min-width:431px){
+  body{background:#111}
+  .page{
+    box-shadow:0 0 0 1px #181818;
+  }
+}
+
+
+/* ===============================
+   UPDATED OFFER / BUYBOX LAYOUT
+   =============================== */
+.buybox{
+  display:none;
+  width:min(1120px, calc(100vw - 24px));
+  margin:38px auto 0;
+  padding:8px 0 54px;
+  font-family:'Roboto Condensed',Arial,sans-serif;
+  color:#111;
+}
+
+.offer-header{
+  width:100%;
+  max-width:1080px;
+  margin:0 auto 24px;
+  padding:24px 22px 22px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#0f6e7e 0%,#1c6c7a 55%,#155f6c 100%);
+  box-shadow:0 10px 28px rgba(15,110,126,.18);
+  text-align:center;
+}
+
+.bb-title{
+  text-align:center;
+  font-family:'Poppins',Arial,sans-serif;
+  font-size:38px;
+  line-height:1.15;
+  font-weight:600;
+  margin:0 0 18px;
+  color:#fff;
+}
+
+.bb-title b{
+  color:#d9fbff;
+  font-weight:800;
+}
+
+.offer-timer-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin:4px auto 0;
+  color:#fff;
+  font-family:'Poppins',Arial,sans-serif;
+}
+
+.offer-timer-label{
+  font-size:14px;
+  line-height:1.2;
+  font-weight:600;
+  opacity:.92;
+}
+
+.offer-timer{
+  min-width:104px;
+  padding:7px 12px;
+  border:2px solid rgba(255,255,255,.92);
+  border-radius:9px;
+  background:rgba(0,0,0,.14);
+  font-size:24px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:1px;
+  font-variant-numeric:tabular-nums;
+}
+
+
+.cards{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap:20px;
+  width:100%;
+  margin:0 auto;
+}
+
+.card{
+  width:calc(33.333% - 14px);
+  max-width:350px;
+  min-height:600px;
+  margin-top:40px;
+  background:#fff;
+  border:2px solid #111;
+  border-radius:8px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  text-decoration:none;
+  color:#000;
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 22px rgba(0,0,0,.10);
+}
+
+.card.best{
+  min-height:710px;
+  margin-top:0;
+  border:3px solid #0f6e7e;
+  background:#f6fdff;
+}
+
+.best-banner{
+  width:100%;
+  min-height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#0f6e7e;
+  color:#fff;
+  font-family:'Poppins',Arial,sans-serif;
+  font-size:18px;
+  line-height:1;
+  font-weight:700;
+  letter-spacing:.15px;
+  padding:8px 10px;
+}
+
+.card-title{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 8px 5px;
+  font-size:25px;
+  line-height:1.05;
+  font-weight:700;
+  text-align:center;
+}
+
+.card.best .card-title{
+  min-height:64px;
+  padding-top:12px;
+}
+
+.product-row{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  flex:1 0 auto;
+  padding:0 14px;
+}
+
+.pack-img{
+  display:block;
+  width:70%;
+  max-width:220px;
+  height:auto;
+  margin:4px auto 2px;
+}
+
+.card.best .pack-img{
+  width:80%;
+  max-width:250px;
+}
+
+.price-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin:6px 0 2px;
+}
+
+.price{
+  font-size:76px;
+  line-height:.95;
+  font-weight:700;
+  letter-spacing:-3px;
+}
+
+.price small{
+  display:block;
+  max-width:55px;
+  font-size:16px;
+  line-height:1.05;
+  font-weight:600;
+  letter-spacing:0;
+  text-align:left;
+}
+
+.buy{
+  display:block;
+  width:100%;
+  padding:10px 16px 0;
+  text-align:center;
+}
+
+.buy img{
+  display:block;
+  width:100%;
+  max-width:260px;
+  height:auto;
+  margin:0 auto;
+}
+
+.ship{
+  min-height:25px;
+  margin:4px 0 5px;
+  padding:0 10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+  font-size:16px;
+  line-height:1.1;
+  font-weight:700;
+  text-align:center;
+  color:#d51f1f;
+}
+
+.card.best .ship{color:#3db35c;}
+
+.truck{
+  font-size:15px;
+  transform:translateY(-1px);
+}
+
+.cardflags{
+  display:block;
+  width:70%;
+  max-width:215px;
+  height:auto;
+  margin:2px auto 8px;
+}
+
+.total{
+  margin:0 0 18px;
+  font-size:25px;
+  line-height:1.05;
+  font-weight:300;
+  text-align:center;
+  color:#111;
+}
+
+.total .old{
+  margin:0 5px;
+  color:#e32929;
+  text-decoration:line-through;
+  text-decoration-thickness:2px;
+  font-weight:300;
+}
+
+.total .new{
+  color:#111;
+  font-weight:700;
+}
+
+.seals{
+  text-align:center;
+  margin:20px auto 0;
+}
+
+.seals img{
+  display:block;
+  width:100%;
+  max-width:398px;
+  height:auto;
+  margin:0 auto;
+}
+
+.usa{
+  max-width:760px;
+  margin:10px auto 0;
+  padding:0 14px;
+  text-align:center;
+  font-family:'Poppins',Arial,sans-serif;
+  font-size:11px;
+  line-height:1.45;
+  font-weight:500;
+  color:#5b9c91;
+}
+
+/* 60-day guarantee block — kept inside buybox so it follows the same VSL delay */
+.guarantee-box{
+  max-width:920px;
+  margin:52px auto 0;
+  padding:20px 20px 30px;
+  background:#fff;
+  border-radius:12px;
+  text-align:left;
+}
+
+.guarantee-badge{
+  display:block;
+  width:130px;
+  max-width:34vw;
+  height:auto;
+  margin:0 auto 10px;
+}
+
+.guarantee-title{
+  margin:0 0 24px;
+  padding:0 10px;
+  text-align:center;
+  text-transform:uppercase;
+  font-family:'Poppins',Arial,sans-serif;
+  font-size:30px;
+  line-height:1.25;
+  font-weight:600;
+  color:#997c33;
+}
+
+.guarantee-copy{
+  padding:0 20px;
+  font-family:'Poppins',Arial,sans-serif;
+  font-size:13px;
+  line-height:1.55;
+  font-weight:400;
+  color:#1a1616;
+}
+
+.guarantee-copy p{margin:0 0 15px;}
+
+.guarantee-signoff{margin-top:22px;}
+
+
+.mobile-savings{display:none;}
+.total-label,.total-values{display:inline;}
+
+.guarantee-signature{
+  display:inline-block;
+  margin-top:2px;
+  font-family:'Brush Script MT','Segoe Script',cursive;
+  font-size:38px;
+  line-height:1;
+  font-weight:400;
+  color:#141414;
+}
+
+@media(max-width:575px){
+  /* Mobile dimensions/proportions matched to the supplied original GLPro page */
+  .buybox{
+    width:100%;
+    max-width:380px;
+    margin:28px auto 0;
+    padding:20px 10px 38px;
+  }
+
+  .offer-header{
+    width:100%;
+    margin:0 auto 18px;
+    padding:18px 12px 16px;
+    border-radius:12px;
+  }
+
+  .bb-title{
+    font-size:27px;
+    line-height:1.13;
+    margin:0 0 14px;
+    padding:0;
+  }
+
+  .offer-timer-wrap{
+    gap:8px;
+    flex-wrap:wrap;
+  }
+
+  .offer-timer-label{
+    font-size:12px;
+  }
+
+  .offer-timer{
+    min-width:96px;
+    padding:7px 10px;
+    font-size:22px;
+  }
+
+  .cards{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:20px;
+    width:100%;
+  }
+
+  .card,
+  .card.best{
+    width:100%;
+    max-width:none;
+    min-height:0;
+    margin:0 auto;
+    border-radius:9px;
+  }
+
+  .card{
+    height:424px;
+    border-width:2px;
+  }
+
+  .card.best{
+    order:-1;
+    height:450px;
+    border-width:2px;
+    background:#f6fdff;
+  }
+
+  .best-banner{
+    min-height:32px;
+    padding:6px 10px;
+    border-radius:5px 5px 0 0;
+    font-size:17px;
+    font-weight:400;
+  }
+
+  .card-title,
+  .card.best .card-title{
+    min-height:0;
+    padding:0 8px;
+    margin:10px 0 5px;
+    font-size:20px;
+    line-height:1.1;
+  }
+
+  .product-row{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    align-items:start;
+    gap:0;
+    width:100%;
+    padding:0 10px;
+    margin-top:5px;
+  }
+
+  .pack-img,
+  .card.best .pack-img{
+    width:100%;
+    max-width:200px;
+    height:auto;
+    margin:4px auto 0;
+    align-self:center;
+  }
+
+  .card.best .pack-img{max-width:200px;}
+
+  .price-wrap{
+    width:100%;
+    min-width:0;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:flex-start;
+    align-content:flex-start;
+    gap:0 8px;
+    margin:25px 0 0;
+  }
+
+  .price{
+    font-size:60px;
+    line-height:.95;
+    letter-spacing:-2px;
+  }
+
+  .price-wrap > small{
+    display:block;
+    max-width:46px;
+    padding-top:10px;
+    margin-top:10px;
+    font-size:16px;
+    line-height:1.1;
+    font-weight:600;
+    letter-spacing:0;
+    text-align:left;
+  }
+
+  .mobile-savings{
+    display:block;
+    flex:0 0 100%;
+    width:100%;
+    max-width:148px;
+    margin:8px auto 0;
+    font-size:14px;
+    line-height:1.45;
+    font-family:'Roboto Condensed',Arial,sans-serif;
+    font-weight:500;
+    text-align:left;
+  }
+
+  .mobile-savings div{white-space:nowrap;}
+  .mobile-savings .check{
+    display:inline-block;
+    width:22px;
+    margin-right:2px;
+    font-size:20px;
+    line-height:1;
+    font-weight:900;
+    color:#111;
+    transform:translateY(2px);
+  }
+
+  .buy{
+    display:block;
+    width:100%;
+    padding:0;
+    margin:0;
+    text-align:center;
+  }
+
+  .buy img{
+    display:inline-block;
+    width:230px;
+    max-width:calc(100% - 30px);
+    height:auto;
+    margin:0 auto;
+  }
+
+  .ship{
+    min-height:0;
+    margin:8px 0 4px;
+    padding:0 5px;
+    gap:6px;
+    font-size:16px;
+    line-height:1.05;
+    font-weight:700;
+  }
+
+  .truck{font-size:15px;}
+
+  .cardflags{
+    width:200px;
+    max-width:calc(100% - 60px);
+    height:auto;
+    margin:2px auto 5px;
+  }
+
+  .total{
+    margin:0 0 8px;
+    font-size:22px;
+    line-height:1.05;
+    text-align:center;
+  }
+
+  .total-label{
+    display:block;
+    margin-bottom:1px;
+    font-weight:700;
+  }
+
+  .total-values{display:block;}
+  .total .old{margin:0 5px 0 0;}
+
+  .seals{margin-top:18px;}
+  .seals img{max-width:303px;}
+
+  .usa{
+    max-width:360px;
+    font-size:10px;
+    padding:0 10px;
+  }
+
+  .guarantee-box{
+    margin:0 5px;
+    padding:24px 12px;
+    border-radius:10px;
+  }
+
+  .guarantee-badge{
+    width:104px;
+    max-width:32vw;
+  }
+
+  .guarantee-title{
+    margin-bottom:18px;
+    padding:0 4px;
+    font-size:22px;
+  }
+
+  .guarantee-copy{
+    padding:0 8px;
+    font-size:12px;
+    line-height:1.5;
+  }
+
+  .guarantee-signature{font-size:33px;}
+}
+
+@media(max-width:360px){
+  .buybox{padding-left:8px;padding-right:8px;}
+  .price{font-size:56px;}
+  .price-wrap > small{font-size:15px;}
+  .mobile-savings{font-size:13px;max-width:140px;}
+}
+
+
+
+/* Buybox compatibility inside dark streaming layout */
+#buybox{
+  max-width:1120px;
+  background:#f3f4f6;
+  color:#111;
+  border-radius:0;
+}
+@media(max-width:575px){
+  #buybox{
+    max-width:430px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
+
+
+#pagePlayBtn{cursor:pointer}
+#pagePlayBtn:active{transform:scale(.985)}
+
+</style>
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/03ccc889-e246-4eff-a982-346fd4a664fd/players/6abd3ff508b80e9782bca856/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/03ccc889-e246-4eff-a982-346fd4a664fd/6abd3fe8fdc7edd92096dcec/main.m3u8" as="fetch" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://license.vturb.com">
+<script>
+  window.pixelId = "6a7b14fa19b4751e642eea65";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  async
+  defer
+></script>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Home">
+        <img src="https://occ.a.nflxso.net/dnmt/api/v6/iL4oJVDYZ8KLSrJ6eG2OwtghbfQ/AAAAAQ4TXm1OaapkwYRGseWYrT2HFpAFV7IX9bgV76BxLOD_049HTkgqZ6zq3enQ0gxU1b-868yGZj1I99Ak9oRykNILYsbpT_0d-be9QKbwkD8OfaEdWL-FHZBiORJ9ppzVCM1-mVn63afS.svg" alt="Logo">
+      </a>
+      <div class="top-actions">
+        <svg class="cast-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M1 18v3h3a3 3 0 0 0-3-3Zm0-4v2a5 5 0 0 1 5 5h2a7 7 0 0 0-7-7Zm0-4v2c5 0 9 4 9 9h2c0-6.1-4.9-11-11-11Zm4-5h14a2 2 0 0 1 2 2v10h-7v2h7a2 2 0 0 0 2-2V7a4 4 0 0 0-4-4H5v2Z"/>
+        </svg>
+        <div class="avatar">D</div>
+      </div>
+    </header>
+
+    <main>
+      <section class="player">
+        <!-- ====================================================== -->
+        <!-- PASTE YOUR VIDEO EMBED HERE                            -->
+        <!-- Replace the placeholder below with your video player. -->
+        <!-- ====================================================== -->
+        <vturb-smartplayer id="vid-6abd3ff508b80e9782bca856" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;">
+  <div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 178.21782178217822% 0 0; z-index: 0; background-color: black;"></div>
+</vturb-smartplayer>
+<script type="text/javascript">
+  var s=document.createElement("script");
+  s.src="https://scripts.converteai.net/03ccc889-e246-4eff-a982-346fd4a664fd/players/6abd3ff508b80e9782bca856/v4/player.js";
+  s.async=!0;
+  document.head.appendChild(s);
+</script>
+      </section>
+
+      <section class="content">
+        <h1>Type 2 Diabetes: A New Perspective</h1>
+
+        <div class="meta">
+          <span class="match">98% match</span>
+          <span>2026</span>
+          <span class="badge">16+</span>
+          <span>Special Presentation</span>
+          <span class="hd">HD</span>
+        </div>
+
+        <button class="watch" type="button" id="pagePlayBtn">
+          <span>▶</span>
+          <span>Play</span>
+        </button>
+
+        <p class="description">
+          After years of research into type 2 diabetes, scientists have learned more about how lifestyle,
+          nutrition, weight management, and metabolic health can influence blood sugar control — with meaningful
+          improvements sometimes appearing within a few weeks, while remission may be possible for some people
+          with sustained changes over time. This presentation explores what current evidence suggests and why
+          these findings are changing the way type 2 diabetes is understood.
+        </p>
+
+        <p class="detail"><strong>Topic:</strong> Type 2 Diabetes, Blood Sugar &amp; Metabolic Health</p>
+        <p class="detail"><strong>Format:</strong> Educational Health Presentation</p>
+      </section>
+    </main>
+
+<div class="buybox" id="buybox">
+
+  <div class="offer-header" id="offer-header">
+    <div class="bb-title">
+      Claim Your Discounted <b>GLPro</b> Below
+    </div>
+    <div class="offer-timer-wrap" aria-label="Special offer countdown">
+      <span class="offer-timer-label">SPECIAL OFFER ENDS IN:</span>
+      <span class="offer-timer" id="offer-timer">15:00</span>
+    </div>
+  </div>
+
+  <div class="cards">
+
+    <!-- 2 PACK -->
+    <a class="card smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP2V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522">
+
+      <div class="card-title">2 PACK • 60 DAYS</div>
+
+      <div class="product-row">
+        <img class="pack-img" src="images/2_GLPATCHES.png" alt="2 PACK • 60 DAYS">
+
+        <div class="price-wrap">
+          <div class="price">$79</div>
+          <small>/ pack</small>
+        </div>
+      </div>
+
+      <span class="buy">
+        <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+          Add to cart
+        </span>
+        <img src="images/GLProButton2.png" alt="Add to cart">
+      </span>
+
+      <div class="ship">+ SHIPPING</div>
+
+      <img class="cardflags" src="images/cards.avif" alt="Payment methods">
+
+      <div class="total">
+        <span class="total-label">Total:</span>
+        <span class="total-values"><span class="old">$254</span><span class="new">$158</span></span>
+      </div>
+    </a>
+
+
+    <!-- 6 PACK / BEST VALUE -->
+    <a class="card best smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP6V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522">
+
+      <div class="best-banner">BEST VALUE</div>
+      <div class="card-title">6 PACK • 180 DAYS</div>
+
+      <div class="product-row">
+        <img class="pack-img" src="images/6_GLPATCHES.png" alt="6 PACK • 180 DAYS">
+
+        <div class="price-wrap">
+          <div class="price">$49</div>
+          <small>/ pack</small>
+          <div class="mobile-savings" aria-hidden="true">
+            <div><span class="check">✓</span><b>SAVE $780</b></div>
+            <div><span class="check">✓</span><b>FREE GIFTS</b></div>
+          </div>
+        </div>
+      </div>
+
+      <span class="buy">
+        <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+          Add to cart
+        </span>
+        <img src="images/Group%20781.png" alt="Add to cart">
+      </span>
+
+      <div class="ship">
+        + FREE FAST US SHIPPING! <span class="truck" aria-hidden="true">🚚</span>
+      </div>
+
+      <img class="cardflags" src="images/cards.avif" alt="Payment methods">
+
+      <div class="total">
+        <span class="total-label">Total:</span>
+        <span class="total-values"><span class="old">$762</span><span class="new">$294</span></span>
+      </div>
+    </a>
+
+
+    <!-- 3 PACK -->
+    <a class="card smartplayer-click-event" href="https://lifebalancepeak.com/b?p=GPP3V1&amp;b=341&amp;fid=640&amp;fnid=2&amp;pfnid=1&amp;pg=9467&amp;aff_id=44522">
+
+      <div class="card-title">3 PACK • 90 DAYS</div>
+
+      <div class="product-row">
+        <img class="pack-img" src="images/3_GLPATCHES.png" alt="3 PACK • 90 DAYS">
+
+        <div class="price-wrap">
+          <div class="price">$69</div>
+          <small>/ pack</small>
+        </div>
+      </div>
+
+      <span class="buy">
+        <span style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+          Add to cart
+        </span>
+        <img src="images/GLProButton2.png" alt="Add to cart">
+      </span>
+
+      <div class="ship">+ SHIPPING</div>
+
+      <img class="cardflags" src="images/cards.avif" alt="Payment methods">
+
+      <div class="total">
+        <span class="total-label">Total:</span>
+        <span class="total-values"><span class="old">$381</span><span class="new">$207</span></span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="seals">
+    <img src="images/SELOS.png" alt="Guarantees">
+  </div>
+
+  <div class="usa">
+    This formula is proudly crafted in the United States of America using
+    premium ingredients sourced from around the world.
+  </div>
+
+  <section class="guarantee-box" aria-label="60-day money-back guarantee">
+    <img class="guarantee-badge" src="images/1%252Fmedia%252FE7JAROAGZBRMEOBX.webp" alt="60 Days Money Back Guarantee">
+
+    <h2 class="guarantee-title">100% Satisfaction 60-Day Money Back Guarantee</h2>
+
+    <div class="guarantee-copy">
+      <p><strong>Your purchase is secured by a 60-day 100% money-back guarantee.</strong></p>
+
+      <p>
+        If GLPro does not meet your expectations, if the results you anticipated fail to materialize,
+        or if you decide you want a refund for absolutely any reason, just drop me an email or call our
+        toll-free line. I promise you'll get back EVERY PENNY you spent within 48 hours.
+      </p>
+
+      <p>Absolutely no questions asked!</p>
+
+      <p class="guarantee-signoff">
+        Sincerely,<br>
+        <span class="guarantee-signature">GLPro Team</span>
+      </p>
+    </div>
+  </section>
+
+</div>
+  </div>
+<script>
+(function(){
+  var timerStarted=false;
+  var remaining=15*60;
+  var timerEl=document.getElementById('offer-timer');
+
+  function renderTimer(){
+    if(!timerEl)return;
+    var minutes=Math.floor(remaining/60);
+    var seconds=remaining%60;
+    timerEl.textContent=String(minutes).padStart(2,'0')+':'+String(seconds).padStart(2,'0');
+  }
+
+  window.startOfferTimer=function(){
+    if(timerStarted)return;
+    timerStarted=true;
+    renderTimer();
+
+    var interval=setInterval(function(){
+      if(remaining<=0){
+        remaining=0;
+        renderTimer();
+        clearInterval(interval);
+        return;
+      }
+      remaining--;
+      renderTimer();
+    },1000);
+  };
+
+  renderTimer();
+})();
+</script>
+
+<script>
+(function(){
+  // 39:10 = 2,350 seconds
+  var DELAY = 2350;
+  var revealed = false;
+  var officialInitialized = false;
+  var fallbackAttached = false;
+  var offerHandled = false;
+  var player = document.getElementById('vid-6abd3ff508b80e9782bca856');
+
+  function scrollToOffer(){
+    if(offerHandled) return;
+    offerHandled = true;
+
+    var target = document.getElementById('offer-header') || document.getElementById('buybox');
+    if(!target) return;
+
+    setTimeout(function(){
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+      if(typeof window.startOfferTimer === 'function') window.startOfferTimer();
+    }, 120);
+  }
+
+  function reveal(){
+    if(revealed) return;
+    revealed = true;
+
+    var b = document.getElementById('buybox');
+    if(b) b.style.display = 'block';
+    scrollToOffer();
+  }
+
+  // Detect if VTurb's official delay method reveals the offer itself.
+  var visibilityPoll = setInterval(function(){
+    var b = document.getElementById('buybox');
+    if(!b) return;
+
+    if(window.getComputedStyle(b).display !== 'none'){
+      revealed = true;
+      scrollToOffer();
+      clearInterval(visibilityPoll);
+    }
+  }, 200);
+
+  // Official VTurb hidden-elements method.
+  function setupOfficialDelay(){
+    if(officialInitialized) return true;
+    if(!player || typeof player.displayHiddenElements !== 'function') return false;
+
+    try{
+      player.displayHiddenElements(DELAY, ['#buybox'], {persist:true});
+      officialInitialized = true;
+      return true;
+    }catch(e){
+      return false;
+    }
+  }
+
+  function attachTimeupdateFallback(){
+    if(fallbackAttached) return true;
+
+    try{
+      var sp = window.smartplayer;
+      if(!(sp && sp.instances && sp.instances.length)) return false;
+
+      var inst = null;
+
+      // Prefer the instance associated with this exact player when possible.
+      for(var i=0; i<sp.instances.length; i++){
+        var candidate = sp.instances[i];
+        var candidateId =
+          candidate && (
+            candidate.id ||
+            (candidate.element && candidate.element.id) ||
+            (candidate.container && candidate.container.id)
+          );
+
+        if(candidateId === 'vid-6abd3ff508b80e9782bca856'){
+          inst = candidate;
+          break;
+        }
+      }
+
+      if(!inst) inst = sp.instances[0];
+      if(!inst || typeof inst.on !== 'function') return false;
+
+      fallbackAttached = true;
+
+      inst.on('timeupdate', function(){
+        if(revealed) return;
+
+        var current = null;
+
+        if(inst.video && typeof inst.video.currentTime === 'number'){
+          current = inst.video.currentTime;
+        }else if(typeof inst.currentTime === 'number'){
+          current = inst.currentTime;
+        }
+
+        if(current !== null && current >= DELAY){
+          reveal();
+        }
+      });
+
+      return true;
+    }catch(e){
+      return false;
+    }
+  }
+
+  function onPlayerReady(){
+    setupOfficialDelay();
+    attachTimeupdateFallback();
+  }
+
+  if(player){
+    player.addEventListener('player:ready', onPlayerReady);
+  }
+
+  document.addEventListener('player:ready', function(event){
+    var eventPlayer = event && event.detail && event.detail.player;
+    if(eventPlayer && player && eventPlayer.id && eventPlayer.id !== player.id) return;
+    onPlayerReady();
+  });
+
+  var fallbackPoll = setInterval(function(){
+    if(attachTimeupdateFallback()){
+      clearInterval(fallbackPoll);
+    }
+    setupOfficialDelay();
+  }, 1000);
+})();
+</script>
+
+
+<script>
+(function(){
+  var btn = document.getElementById('pagePlayBtn');
+  var playerEl = document.getElementById('vid-6abd3ff508b80e9782bca856');
+
+  if(!btn) return;
+
+  function getVTurbInstance(){
+    try{
+      var sp = window.smartplayer;
+      if(!(sp && sp.instances && sp.instances.length)) return null;
+
+      // Prefer the instance linked to this exact player.
+      for(var i = 0; i < sp.instances.length; i++){
+        var inst = sp.instances[i];
+        if(!inst) continue;
+
+        var candidateId =
+          inst.id ||
+          (inst.element && inst.element.id) ||
+          (inst.container && inst.container.id) ||
+          (inst.playerElement && inst.playerElement.id);
+
+        if(candidateId === 'vid-6abd3ff508b80e9782bca856'){
+          return inst;
+        }
+      }
+
+      // There is only one VTurb player on this page, so this is a safe fallback.
+      return sp.instances[0] || null;
+    }catch(e){
+      return null;
+    }
+  }
+
+  function tryPlay(){
+    var inst = getVTurbInstance();
+    if(!inst) return false;
+
+    try{
+      if(typeof inst.play === 'function'){
+        var result = inst.play();
+        if(result && typeof result.catch === 'function') result.catch(function(){});
+        return true;
+      }
+
+      if(inst.video && typeof inst.video.play === 'function'){
+        var result2 = inst.video.play();
+        if(result2 && typeof result2.catch === 'function') result2.catch(function(){});
+        return true;
+      }
+    }catch(e){}
+
+    return false;
+  }
+
+  function scrollToPlayer(){
+    if(!playerEl) return;
+
+    try{
+      playerEl.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }catch(e){
+      playerEl.scrollIntoView();
+    }
+  }
+
+  btn.addEventListener('click', function(){
+    scrollToPlayer();
+
+    // First attempt happens in the user click event, which helps with
+    // browser autoplay restrictions.
+    if(tryPlay()) return;
+
+    // If the VTurb instance is still initializing, retry briefly.
+    var attempts = 0;
+    var retry = setInterval(function(){
+      attempts++;
+
+      if(tryPlay() || attempts >= 24){
+        clearInterval(retry);
+      }
+    }, 250);
+  });
+})();
+</script>
+
+</body>
+</html>
